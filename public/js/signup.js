@@ -19,7 +19,6 @@ async function handleSignupFormSubmit(event) {
         return
     } catch (error) {
         handleErrorMessage(error)
-
     }
 }
 

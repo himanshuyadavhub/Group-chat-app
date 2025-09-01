@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get("/", (req,res) => {
-    res.redirect("/user/signup");
+    res.redirect("/user/login");
 })
 
 app.use("/user", userRoutes)

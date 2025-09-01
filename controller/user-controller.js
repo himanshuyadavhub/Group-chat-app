@@ -1,6 +1,7 @@
 const responses = require("../utils/responses");
 const path = require('path');
-const bcrypt= require('bcrypt');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const Users = require("../model/users");
 
@@ -17,7 +18,7 @@ function renderSignupPage(req, res) {
 async function createUser(req, res) {
     const { name, email, phoneNumber, password, confirmPassword } = req.body;
     try {
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             responses.badRequest(res, "Password mismatched!");
             return;
         }
@@ -26,6 +27,13 @@ async function createUser(req, res) {
             responses.badRequest(res, "Email already used!");
             return;
         }
+
+        user = await Users.findOne({ where: { phoneNumber } });
+        if (user) {
+            responses.badRequest(res, "Phone Number already used!");
+            return;
+        }
+
         const hash = await bcrypt.hash(password, 10);
         user = {
             name,
@@ -35,7 +43,7 @@ async function createUser(req, res) {
             confirmPassword
         }
 
-        const createdUser= await Users.create(user);
+        const createdUser = await Users.create(user);
         responses.created(res, "New User created!", user);
         return
     } catch (error) {
@@ -45,7 +53,43 @@ async function createUser(req, res) {
 
 }
 
+function renderLoginPage(req, res) {
+    try {
+        const pathName = path.join(__dirname, '../public/views/login.html');
+        res.sendFile(pathName)
+    } catch (error) {
+        console.log("Error: renderLoginPage", error.message);
+        return responses.notFound(res, "Getting signup page failed!");
+    }
+}
+
+async function loginUser(req, res) {
+    const { email, password } = req.body;
+    try {
+        const user = await Users.findOne({ where: { email } });
+        if (!user) {
+            responses.badRequest(res, "Email id not registered!");
+            return;
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            responses.notAuthorized(res, "Entered wrong password!");
+            return;
+        }
+
+        const jwtToken = jwt.sign({ userId: user.id }, "145896jwtsecretkey");
+        return responses.ok(res, "Login sucessfully!", { jwtToken });
+    } catch (error) {
+        console.log("Error: loginUser", error.message);
+        return responses.serverError(res, "Login user failed!");
+    }
+
+}
+
 module.exports = {
     renderSignupPage,
-    createUser
+    createUser,
+    renderLoginPage,
+    loginUser
 }
