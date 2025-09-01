@@ -1,5 +1,6 @@
 const responses = require("../utils/responses");
 const path = require('path');
+const bcrypt= require('bcrypt');
 
 const Users = require("../model/users");
 
@@ -16,7 +17,10 @@ function renderSignupPage(req, res) {
 async function createUser(req, res) {
     const { name, email, phoneNumber, password, confirmPassword } = req.body;
     try {
-
+        if(password !== confirmPassword){
+            responses.badRequest(res, "Password mismatched!");
+            return;
+        }
         let user = await Users.findOne({ where: { email } });
         if (user) {
             responses.badRequest(res, "Email already used!");
