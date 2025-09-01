@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const userRoutes= require('./routes/user-routes');
 
+app.use(express.json());
+app.use(express.static('public'));
 
-app.get("/", (req,res)=> {
-    res.send("Server running fine!")
+app.get("/", (req,res) => {
+    res.redirect("/user/signup");
 })
+
+app.use("/user", userRoutes)
 
 
 app.listen(PORT, function(err){
