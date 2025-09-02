@@ -15,18 +15,9 @@ async function checkingDbConnection() {
   }
 }
 
-async function syncDatabase() {
-  try {
-    await sequelize.sync(); // Creates tables if they don't exist
-    console.log('Database synchronized successfully!');
-  } catch (error) {
-    console.error('Error syncing database:', error);
-  }
-}
 
 
 checkingDbConnection();
-syncDatabase();
 
 
 

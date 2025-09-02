@@ -10,6 +10,7 @@ async function handleLoginFormSubmit(event){
         const {message, data}= res.data;
         localStorage.setItem("token", data.jwtToken);
         alert("login successfull")
+        window.location.href= BASE_URL+ "/message"
 
     } catch (error) {
         handleErrorMessage(error);

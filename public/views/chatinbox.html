@@ -12,12 +12,14 @@
     <div class="main">
         <div class="inbox">
             <h3>Chat App - Inbox</h3>
-            <div class="prev-chat"></div>
+            <div class="prev-chat">
+                Previous messages
+            </div>
         </div>
 
         <div class="input-message">
             <input type="text" name="message" id="message" placeholder="Enter message">
-            <button id="send-btn">Send</button>
+            <button id="send-btn" onclick="messageSendingHandler()">Send</button>
         </div>
     </div>
 

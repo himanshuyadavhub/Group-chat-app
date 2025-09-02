@@ -19,7 +19,9 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    align-items: center;
+    align-items: stretch;
+    text-align: center;
+    padding: 15px;
 }
 
 h3{
@@ -27,7 +29,19 @@ h3{
     color: black;
     border-radius: 6px;
     padding: 5px 10px;
+    text-align: center;
 }
 
+.inbox{
+    flex: 10;
+}
 
+.prev-chat{
+    background-color: rgb(217, 215, 215);
+    color: black;
+    border-radius: 6px;
+}
 
+.input-message{
+    flex: 1;
+}

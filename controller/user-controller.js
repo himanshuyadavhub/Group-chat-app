@@ -2,8 +2,9 @@ const responses = require("../utils/responses");
 const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
-const Users = require("../model/users");
+const {Users} = require("../model/Associations");
 
 function renderSignupPage(req, res) {
     try {
@@ -78,7 +79,7 @@ async function loginUser(req, res) {
             return;
         }
 
-        const jwtToken = jwt.sign({ userId: user.id }, "145896jwtsecretkey");
+        const jwtToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY);
         return responses.ok(res, "Login sucessfully!", { jwtToken });
     } catch (error) {
         console.log("Error: loginUser", error.message);
