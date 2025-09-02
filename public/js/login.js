@@ -8,8 +8,8 @@ async function handleLoginFormSubmit(event){
     try {
         const res= await axios.post(BASE_URL + `/user/login`, {email, password});
         const {message, data}= res.data;
-        console.log(message);
-        console.log(data);
+        localStorage.setItem("token", data.jwtToken);
+        alert("login successfull")
 
     } catch (error) {
         handleErrorMessage(error);

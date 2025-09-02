@@ -68,7 +68,7 @@ async function loginUser(req, res) {
     try {
         const user = await Users.findOne({ where: { email } });
         if (!user) {
-            responses.badRequest(res, "Email id not registered!");
+            responses.notFound(res, "Email id not registered!");
             return;
         }
 
