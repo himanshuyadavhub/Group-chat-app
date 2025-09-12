@@ -1,9 +1,10 @@
 const { Sequelize } = require('sequelize');
-const bcrypt= require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const sequelize = new Sequelize('groupchatapp', 'root', 'Server123', {
   host: 'localhost',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging:false
 });
 
 async function checkingDbConnection() {

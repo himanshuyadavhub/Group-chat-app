@@ -3,8 +3,9 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
+const { Op } = require('sequelize');
 
-const {Users} = require("../model/Associations");
+const { Users } = require("../model/Associations");
 
 function renderSignupPage(req, res) {
     try {
@@ -88,9 +89,32 @@ async function loginUser(req, res) {
 
 }
 
+async function getAllUsers(req, res) {
+    const userId = req.userId;
+    try {
+        const contacts = await Users.findAll({
+            where: {
+                id: {
+                    [Op.ne]: [userId],
+                }
+            },
+            attributes:["name", "email", "phoneNumber"]
+        })
+        if (contacts.length > 0) {
+            return responses.ok(res, "Fetched all contacts", contacts);
+        } else {
+            return responses.ok(res, "No contact found!", []);
+        }
+    } catch (error) {
+        console.log("Error: getAllUsers -- ", error.message);
+        return responses.serverError(res, "Getting all contacts failed!");
+    }
+}
+
 module.exports = {
     renderSignupPage,
     createUser,
     renderLoginPage,
-    loginUser
+    loginUser,
+    getAllUsers
 }

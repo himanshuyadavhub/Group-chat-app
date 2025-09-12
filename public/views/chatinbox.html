@@ -10,16 +10,24 @@
 
 <body>
     <div class="main">
-        <div class="inbox">
-            <h3>Chat App - Inbox</h3>
-            <div class="prev-chat">
-                Previous messages
+        <h3>Chat App - Inbox</h3>
+        <div class="chat-window">
+            <div class="contacts" id="contacts-div">
+
+            </div>
+            <div class="prev-chat" id="prev-chat-div">
+
             </div>
         </div>
 
         <div class="input-message">
-            <input type="text" name="message" id="message" placeholder="Enter message">
-            <button id="send-btn" onclick="messageSendingHandler()">Send</button>
+            <form onsubmit="messageSendingHandler(event)" id="input-form">
+                <textarea type="text" name="message" id="message" placeholder="Enter message"></textarea>
+                <input type="file" id="media-input" name="mediaInput" style="display: none;">
+                <label for="media-input" id="label-media-input">Upload File</label>
+                <button type="submit" id="send-btn">Send</button>
+            </form>
+
         </div>
     </div>
 
