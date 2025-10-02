@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group chat-Login</title>
+</head>
+<body>
+    <div class="new-account-div">
+        <button onclick="handleSignupBtn()">Sign Up</button>
+    </div>
+    <div id="login-form-div" class="login-form-div">
+        <form onsubmit="handleLoginFormSubmit(event)">
+            <input type="email" name="email" id="email" placeholder="Enter email address.." required>
+            <input type="password" name="password" id="password" placeholder="Enter password.." required>
+            <button type="submit" id="form-submit-btn">Log In</button>
+        </form>
+    </div>
+</body>
+<script src="../js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</html>

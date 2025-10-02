@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-inbox</title>
+    <link rel="stylesheet" href="../style/inbox.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="main-heading">
+            <h1>Group Chat Inbox</h1>
+        </div>
+        <div class="main-content">
+            <div class="participants-div">
+                <h3>Online Users</h4>
+
+            </div>
+            <div class="chat-window" onscroll="handleInfiniteScroll(event)">
+                
+            </div>
+        </div>
+        <div class="input-message-div">
+            <form onsubmit="messageSendingHandler(event)" id="input-form">
+                <textarea type="text" name="message" id="message" placeholder="Enter message"></textarea>
+                <input type="file" accept="image/*" id="media-input" name="mediaInput" style="display: none;">
+                <label for="media-input" id="label-media-input">Upload File</label>
+                <button type="submit" id="send-btn">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js//inbox.js"></script>
+
+</html>

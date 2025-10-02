@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat-SignUp</title>
+    <link rel="stylesheet" href="../style/signup.css">
+</head>
+<body>
+    <div id="signup-form-div" class="signup-form-div">
+        <form onsubmit="handleSignupFormSubmit(event)" >
+            <input type="text" name="name" id="name" placeholder="Enter Name:" required>
+            <input type="text" name="email" id="email" placeholder="Enter Email Id:" required>
+            <input type="tel" name="phonenumber" id="phonenum" placeholder="Enter Phone Number:" required>
+            <input type="password" name="password" id="password" placeholder="Create Password" required>
+            <input type="password" name="confirmPassword" id="confirm-password" placeholder="Confirm Password" required >
+            <button type="submit" id="form-submit-btn">Sign Up</button>
+        </form>
+    </div>
+</body>
+<script src="../js/signup.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</html>
